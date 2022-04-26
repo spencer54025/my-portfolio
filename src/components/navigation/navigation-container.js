@@ -10,10 +10,11 @@ export default class NavigationContainer extends Component {
     render() {
         return(
             <div>
-            <NavLink exact to='/'>Home</NavLink>
-            <NavLink to='/about'>About</NavLink>
-            <button>Contact</button>
-            <button>Blog</button>
+            <NavLink exact to='/' activeClassName='nav-link-active'>Home</NavLink>
+            
+            <NavLink to='/about' activeClassName='nav-link-active'>About</NavLink>
+            <NavLink to='/contact' activeClassName='nav-link-active'>Contact</NavLink>
+            <NavLink to='/blog' activeClassName='nav-link-active'>Blog</NavLink>
             {false ? <button>Add Blog</button> : null} 
             </div>
         )
