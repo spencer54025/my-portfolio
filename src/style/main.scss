@@ -25,8 +25,23 @@ body {
     color: rgb(255, 80, 177);
 }
 
+button {
+    background-color: rgb(255, 80, 177);
+    border-radius: 2px;
+    border: 2px solid black;
+}
+
+button:hover {
+    background-color: white;
+}
+
 .app {
     margin-top: 2rem;
     display: grid;
     justify-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(255, 80, 177);
 }

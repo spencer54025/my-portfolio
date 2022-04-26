@@ -1,18 +1,20 @@
 import React, {Component} from 'react'
+import { NavLink } from 'react-router-dom'
 
 export default class NavigationContainer extends Component {
     constructor() {
         super()
     }
 
+
     render() {
         return(
             <div>
-            <button>Home</button>
-            <button>About</button>
+            <NavLink exact to='/'>Home</NavLink>
+            <NavLink to='/about'>About</NavLink>
             <button>Contact</button>
             <button>Blog</button>
-            <button>Add Blog</button>
+            {false ? <button>Add Blog</button> : null} 
             </div>
         )
     }
