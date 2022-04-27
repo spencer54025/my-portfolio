@@ -3,11 +3,17 @@ body {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.75em;
     background-color: black;
-    color: rgb(255, 50, 177);
+    color: $pink;
 
     img {
         width: 275px;
         height: 275px;
+    }
+
+    .portfolio-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
 

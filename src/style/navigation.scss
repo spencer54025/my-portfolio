@@ -5,6 +5,10 @@
     height: 22px;
     border-bottom: 1px solid transparent;
 
+    .nav-link-active {
+        border-bottom: 3px solid $pink;
+    }
+
     .left-side {
         display: flex;
         justify-content: space-around;
@@ -16,15 +20,13 @@
 
     a {
         text-decoration: none;
-        color: rgb(255, 50, 177);
+        color: $pink;
         transition: 0.7s ease-in-out;
         border-bottom: 3px transparent;
+        border-radius: 3px;
     }
 
     a:hover {
-        border-bottom: 3px solid rgb(255, 50, 177);
+        border-bottom: 3px solid $pink;
     }
-
-
-
 }
