@@ -8,8 +8,8 @@ export default class Blog extends Component {
     }
     render(){
         return(
-        <div>
-            <div>Blog</div>
+        <div >
+            <h2>Blog</h2>
 
             <div>
                 <Link to='/about'>Read more about me</Link>

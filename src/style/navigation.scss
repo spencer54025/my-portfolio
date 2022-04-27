@@ -1,0 +1,30 @@
+.nav-wrapper {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 32px;
+    height: 22px;
+    border-bottom: 1px solid transparent;
+
+    .left-side {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 25px;
+    }
+
+
+
+    a {
+        text-decoration: none;
+        color: rgb(255, 50, 177);
+        transition: 0.7s ease-in-out;
+        border-bottom: 3px transparent;
+    }
+
+    a:hover {
+        border-bottom: 3px solid rgb(255, 50, 177);
+    }
+
+
+
+}

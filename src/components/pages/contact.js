@@ -6,8 +6,8 @@ export default class Contact extends Component {
     }
     render() {
         return(
-            <div>
-                Contact
+            <div >
+                <h2>Contact</h2>
             </div>
         )
     }
