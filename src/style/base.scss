@@ -2,19 +2,16 @@ body {
     margin: 0px;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.75em;
-    background-color: black;
+    background-color: $blue;
     color: $pink;
 
     img {
         width: 275px;
         height: 275px;
     }
+}
 
-    .portfolio-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
 }
