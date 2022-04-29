@@ -24,14 +24,28 @@ export default class Login extends Component {
         },
         { withCredentials: true }
         ).then(response => {
-            console.log(response)
+            if (response.data.status === 'created') {
+                console.log("welcome")
+            } else {
+                this.setState({
+                    errorText: "wrong email or password",
+                    email: "",
+                    password: ""
+                })
+            }
+
+        }).catch(error => {
+            this.setState({
+                errorText: "an error occurred"
+            })
         })
         event.preventDefault();
     }
 
     handleChange(event) {
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            errorText: ""
         })
     }
 
@@ -40,6 +54,7 @@ export default class Login extends Component {
             <div>
                 <h1>Login to access dashboard</h1>
                 <form onSubmit={this.handleSubmit}>
+                <div>{this.state.errorText}</div>
 
                     <input 
                     type='emial'
