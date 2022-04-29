@@ -8,8 +8,10 @@ export default class Blog extends Component {
     }
     render(){
         return(
-        <div >
-            <h2>Blog</h2>
+        <div className='page-info-wrapper'>
+            <div>
+                <h2>Blog</h2>
+            </div>
 
             <div>
                 <Link to='/about'>Read more about me</Link>

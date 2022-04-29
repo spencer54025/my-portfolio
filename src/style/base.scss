@@ -10,3 +10,11 @@ body {
     display: grid;
     grid-template-columns: 1fr;
 }
+
+.page-info-wrapper {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

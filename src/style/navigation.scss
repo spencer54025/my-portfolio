@@ -2,8 +2,9 @@
     display: flex;
     justify-content: space-around;
     padding-top: 32px;
-    height: 22px;
+    height: 52px;
     border-bottom: 1px solid transparent;
+    align-items: center;
 
     .nav-link-active {
         border-bottom: 3px solid $pink;
@@ -30,3 +31,4 @@
         border-bottom: 3px solid $pink;
     }
 }
+
