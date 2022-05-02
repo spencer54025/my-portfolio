@@ -24,6 +24,7 @@ export default class App extends Component {
     }
     this.handleSuccessfulLogin=this.handleSuccessfulLogin.bind(this)
     this.handleUnSuccessfulLogin=this.handleUnSuccessfulLogin.bind(this)
+    this.handleSuccessfulLogout=this.handleSuccessfulLogout.bind(this)
   }
 
   handleSuccessfulLogin() {
@@ -33,6 +34,12 @@ export default class App extends Component {
   }
 
   handleUnSuccessfulLogin() {
+    this.setState({
+      loggedInStatus: "NOT_LOGGED_IN"
+    })
+  }
+
+  handleSuccessfulLogout() {
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN"
     })
@@ -53,7 +60,8 @@ export default class App extends Component {
          this.setState({
            loggedInStatus: "LOGGED_IN"
          })   
-       } else if (!loggedIn && loggedInStatus === "NOT_LOGGED_IN") {
+       } 
+       else if (!loggedIn && loggedInStatus === "NOT_LOGGED_IN") {
         this.setState({
           loggedInStatus: "NOT_LOGGED_IN"
         })
@@ -68,12 +76,21 @@ export default class App extends Component {
     this.checkLoginStatus()
   }
 
+  authorizedPages() {
+    return [
+      <Route path="/blog" component={Blog} />
+    ]
+  }
+
   render() {
     return (
       <div className='container'>
         <Router>
           <div>
-            <NavigationContainer />
+            <NavigationContainer 
+            loggedInStatus={this.state.loggedInStatus}
+            handleSuccessfulLogout={this.handleSuccessfulLogout}
+            />
             <h2>{this.state.loggedInStatus}</h2>
             <Switch>
                <Route exact path="/" component={Home} />
@@ -89,7 +106,7 @@ export default class App extends Component {
                 )}
                 />
                <Route path="/contact" component={Contact} />
-               <Route path="/blog" component={Blog} />
+               {this.state.loggedInStatus === "LOGGED_IN" ? this.authorizedPages(): null}
                <Route exact path="/detail/:slug" component={PortfolioDetail} />
                <Route component={NoMatch} />
             </Switch>
@@ -99,5 +116,3 @@ export default class App extends Component {
     )
   }
 }
-
-
