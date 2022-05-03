@@ -36,5 +36,19 @@
     a:hover {
         border-bottom: 3px solid $pink;
     }
+
+    button {
+        background-color: inherit;
+        color: inherit;
+        border: 2.5px solid $purple;
+        border-radius: 4px;
+        font-size: .8em;
+        transition: .8s;
+
+        &:hover {
+            font-size: .85em;
+        }
+    }
+
 }
 
