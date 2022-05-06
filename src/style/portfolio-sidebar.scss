@@ -6,4 +6,23 @@
     .portfolio-img img {
         width: 100% ;
     }
+
+    .text-content{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .title {
+        font-size: 1.5em;
+    }
+    .delete-icon {
+        cursor: pointer;
+        font-size: 1.2em;
+        transition: 0.8s ease-in-out;
+
+        &:hover {
+            font-size: 1.3em;
+            color: $purple;
+        }
+    }
 }
