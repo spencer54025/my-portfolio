@@ -1,0 +1,24 @@
+.form-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 21px;
+    padding: 42px;
+
+    @include input-element();
+    input {
+        margin-bottom: 0px;
+        padding: 21px;
+    }
+
+    .filepicker {  
+        grid-gap: 21px;
+        width: 250px;
+        height: 250px
+    }
+    .btn{
+        @include base-btn();
+        background-color: inherit;
+        border: 0px;
+    }
+}
+

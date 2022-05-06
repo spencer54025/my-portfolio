@@ -116,34 +116,30 @@ export default class PortfolioForm extends Component {
 
   render() {
     return (
-      <div>
-        <h1>portfolioform</h1>
-        <form onSubmit={this.handleSubmit}>
-            <div>
+        <form onSubmit={this.handleSubmit} className="form-wrapper">
+            <div className="two-column">
                 <input type="text" name="name" placeholder="Portfolio Item Name" value={this.state.name} onChange={this.handleChange} />
                 <input type="text" name="url" placeholder="URL" value={this.state.url} onChange={this.handleChange} />
                 <input type="text" name="position" placeholder="Position" value={this.state.position} onChange={this.handleChange} />
-                <select name="category" value={this.state.category} onChange={this.handleChange} >
+                <select className="select-element" name="category" value={this.state.category} onChange={this.handleChange} >
                   <option value="ecommerce">ecommerce</option>
                   <option value="scheduling">scheduling</option>
                   <option value="enterprise">enterprise</option>
                 </select>
             </div>
-            <div>
+            <div className="one-column">
                 <textarea type="text" name="description" placeholder="Description" value={this.state.description} onChange={this.handleChange} />
             </div>
 
-            <div className="imgage-uploaders">
-              <DropzoneComponent ref={this.thumbRef} config={this.componentConfig()} djsConfig={this.djsConfig()} eventHandlers={this.handleThumbDrop()}></DropzoneComponent>
-              <DropzoneComponent ref={this.bannerRef} config={this.componentConfig()} djsConfig={this.djsConfig()} eventHandlers={this.handleBannerDrop()}></DropzoneComponent>
-              <DropzoneComponent ref={this.logoRef} config={this.componentConfig()} djsConfig={this.djsConfig()} eventHandlers={this.handleLogoDrop()}></DropzoneComponent>
+            <div className="imgage-uploaders three-column">
+              <DropzoneComponent ref={this.thumbRef} config={this.componentConfig()} djsConfig={this.djsConfig()} eventHandlers={this.handleThumbDrop()}> <div className="dz-message">Thumbnail</div> </DropzoneComponent>
+              <DropzoneComponent ref={this.bannerRef} config={this.componentConfig()} djsConfig={this.djsConfig()} eventHandlers={this.handleBannerDrop()}><div className="dz-message">Banner</div></DropzoneComponent>
+              <DropzoneComponent ref={this.logoRef} config={this.componentConfig()} djsConfig={this.djsConfig()} eventHandlers={this.handleLogoDrop()}><div className="dz-message">Logo</div></DropzoneComponent>
             </div>
-
             <div>
-                <button type="submit">Save</button>
+                <button className="btn" type="submit">Save</button>
             </div>
         </form>
-      </div>
     );
   }
 }
