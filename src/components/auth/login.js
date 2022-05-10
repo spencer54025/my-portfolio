@@ -56,8 +56,6 @@ export default class Login extends Component {
 
     render() {
         return(
-            <div>
-                <h1>Login to access dashboard</h1>
                 <form onSubmit={this.handleSubmit}>
                 <div>{this.state.errorText}</div>
 
@@ -81,7 +79,6 @@ export default class Login extends Component {
                         <button type='submit'>Login</button>
                     </div>    
                 </form>
-            </div>
         )
     }
 }

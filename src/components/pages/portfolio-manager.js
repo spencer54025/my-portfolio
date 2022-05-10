@@ -9,12 +9,28 @@ export default class PortfolioManager extends Component {
         super()
 
         this.state = {
-            portfolioItems: []
+            portfolioItems: [],
+            portfolioToEdit: {}
         }
 
         this.handleFormSubmitError = this.handleFormSubmitError.bind(this)
-        this.handleSuccessfulFormSubmit = this.handleSuccessfulFormSubmit.bind(this)
+        this.handleNewFormSubmit = this.handleNewFormSubmit.bind(this)
+        this.handleEditFormSubmit = this.handleEditFormSubmit.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
+        this.handleEdit = this.handleEdit.bind(this)
+        this.clearPortfolioToEdit = this.clearPortfolioToEdit.bind(this)
+    }
+
+    clearPortfolioToEdit() {
+        this.setState({
+            portfolioToEdit: {}
+        })
+    }
+
+    handleEdit(portfolioItem) {
+        this.setState({
+            portfolioToEdit: portfolioItem
+        })
     }
 
     handleDelete(portfolioItem) {
@@ -34,7 +50,11 @@ export default class PortfolioManager extends Component {
         })
     }
 
-    handleSuccessfulFormSubmit(portfolioItem) {
+    handleEditFormSubmit() {
+        this.getPortfolioItems()
+    }
+
+    handleNewFormSubmit(portfolioItem) {
         this.setState({
             portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
         })
@@ -65,12 +85,15 @@ export default class PortfolioManager extends Component {
             <div className='manager-container'>
                 <div className="left-side">
                     <PortfolioForm
-                        handleSuccessfulFormSubmit={this.handleSuccessfulFormSubmit}
+                        handleNewFormSubmit={this.handleNewFormSubmit}
                         handleFormSubmitError={this.handleFormSubmitError}
+                        clearPortfolioToEdit={this.clearPortfolioToEdit}
+                        portfolioToEdit={this.state.portfolioToEdit}
+                        handleEditFormSubmit={this.handleEditFormSubmit}
                     />
                 </div>
                 <div className="right-side">
-                    <PortfolioSidebarList data={this.state.portfolioItems} handleDelete={this.handleDelete} />
+                    <PortfolioSidebarList data={this.state.portfolioItems} handleDelete={this.handleDelete} handleEdit={this.handleEdit} />
                 </div>
             </div>
         )

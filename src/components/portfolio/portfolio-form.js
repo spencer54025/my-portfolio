@@ -10,14 +10,17 @@ export default class PortfolioForm extends Component {
         super(props)
 
         this.state = {
-            name: "",
-            description: "",
-            category: 'ecommerce',
-            position: "",
-            url: '',
-            thumb_image: "",
-            banner_image: "",
-            logo: ""  
+          name: "",
+          description: "",
+          category: "eCommerce",
+          position: "",
+          url: "",
+          thumb_image: "",
+          banner_image: "",
+          logo: "",
+          editMode: false,
+          apiUrl: "https://spencervp.devcamp.space/portfolio/portfolio_items",
+          apiAction: "post"
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -30,6 +33,36 @@ export default class PortfolioForm extends Component {
         this.thumbRef = React.createRef()
         this.bannerRef = React.createRef()
         this.logoRef = React.createRef()
+    }
+
+    componentDidUpdate() {
+      if(Object.keys(this.props.portfolioToEdit).length > 0) {
+        const {
+          id,
+          name,
+          description,
+          category,
+          position,
+          url,
+          thumb_image,
+          banner_image,
+          logo
+        } = this.props.portfolioToEdit
+
+        this.props.clearPortfolioToEdit()
+
+        this.setState({
+          id: id,
+          name: name || '',
+          description: description || '',
+          category: category || 'ecommerce',
+          position: position || "",
+          url: url || '',
+          editMode: true,
+          apiUrl: `https://spencervp.devcamp.space/portfolio/portfolio_items/${id}`,
+          apiAction: "patch"
+        })
+      }
     }
 
     handleThumbDrop() {
@@ -86,8 +119,19 @@ export default class PortfolioForm extends Component {
     }
 
     handleSubmit(event) {
-      axios.post("https://spencervp.devcamp.space/portfolio/portfolio_items", this.buildForm(), { withCredentials: true })
+      axios({
+        method: this.state.apiAction,
+        url: this.state.apiUrl,
+        data: this.buildForm(),
+        withCredentials: true 
+      })
+      
       .then(response => {
+        if(this.state.editMode) {
+          this.props.handleEditFormSubmit()
+        } else {
+          this.props.handleNewFormSubmit()
+        }
         this.setState({
             name: "",
             description: "",
@@ -96,9 +140,15 @@ export default class PortfolioForm extends Component {
             url: '',
             thumb_image: "",
             banner_image: "",
-            logo: ""  
+            logo: "",
+            editMode: false,
+            apiUrl: "https://spencervp.devcamp.space/portfolio/portfolio_items",
+            apiAction: "post",
+            thumb_image: thumb_image_url || '',
+            banner_image: banner_image_url || '',
+            logo: logo_url || ''
         });
-        this.props.handleSuccessfulFormSubmit(response.data.portfolio_item);
+        this.props.handleNewFormSubmit(response.data.portfolio_item);
         [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {
             ref.current.dropzone.removeAllFiles()
           })
