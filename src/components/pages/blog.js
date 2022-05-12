@@ -12,6 +12,13 @@ export default class Blog extends Component {
         }
 
         this.getBlogItems = this.getBlogItems.bind(this)
+        this.activateInfiniteScroll()
+    }
+
+    activateInfiniteScroll() {
+        window.onscroll = () => {
+            
+        }
     }
 
 
@@ -40,8 +47,10 @@ export default class Blog extends Component {
         })
         
         return(
-        <div className='page-info-wrapper'>
-                {blogRecords}
+        <div className='blog-container'>
+            <div className="content-container">
+                    {blogRecords}
+            </div>
         </div>
         )
     }
