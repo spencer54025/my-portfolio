@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactModal from 'react-modal'
+import BlogForm from '../blog/blog-form'
 
 ReactModal.setAppElement(".app-wrapper")
 
@@ -21,7 +22,13 @@ export default class BlogModal extends Component{
                 backgroundColor: "rgba(1,1,1,.75)"
             }
         }
+        this.handleFormSubmit = this.handleFormSubmit.bind(this)
     }
+
+    handleFormSubmit(blog) {
+        console.log('wack', blog) 
+    }
+
 
     render(){
         return(
@@ -31,7 +38,7 @@ export default class BlogModal extends Component{
                   onRequestClose={() => {
                     this.props.handleModalClose()
                 }} isOpen={this.props.modalIsOpen} >
-                    <h1>im in a modal</h1>
+                    <BlogForm handleFormSubmit={this.handleFormSubmit} />
                 </ReactModal>
             </div>
         )
