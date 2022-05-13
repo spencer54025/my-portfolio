@@ -26,7 +26,7 @@ export default class BlogModal extends Component{
     }
 
     handleFormSubmit(blog) {
-        console.log('wack', blog) 
+        this.props.handleNewBlogSubmit(blog) 
     }
 
 

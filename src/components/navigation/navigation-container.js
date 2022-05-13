@@ -3,6 +3,7 @@ import { withRouter } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 
 const NavigationComponent = (props) => {
@@ -49,7 +50,7 @@ const NavigationComponent = (props) => {
             </div>
             <div className="right-side">
                 {props.loggedInStatus === "LOGGED_IN" ? <span>Spencer Van Patten</span>: null}
-                {props.loggedInStatus === "LOGGED_IN" ? <button onClick={handleSignOut}><FontAwesomeIcon icon='sign-out-alt' /></button>: null}
+                {props.loggedInStatus === "LOGGED_IN" ? <button onClick={handleSignOut}><FontAwesomeIcon icon={faSignOutAlt} /></button>: null}
             </div>
         </div>
     )

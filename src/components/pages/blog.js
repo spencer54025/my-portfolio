@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import BlogItem from '../blog/blog-item'
 import BlogModal from "../modals/blog-modal"
@@ -22,6 +23,14 @@ export default class Blog extends Component {
         window.addEventListener("scroll", this.onScroll, false)
         this.handleNewBlogClick = this.handleNewBlogClick.bind(this)
         this.handleModalClose = this.handleModalClose.bind(this)
+        this.handleNewBlogSubmit = this.handleNewBlogSubmit.bind(this)
+    }
+
+    handleNewBlogSubmit(blog) {
+        this.setState({
+            modalIsOpen: false,
+            blogItems: [blog].concat(this.state.blogItems)
+        })
     }
 
     handleModalClose() {
@@ -83,10 +92,14 @@ export default class Blog extends Component {
         
         return(
         <div className='blog-container'>
-            <BlogModal handleModalClose={this.handleModalClose} modalIsOpen={this.state.modalIsOpen}/>
-            <div className='new-blog-link'>
-                <a onClick={this.handleNewBlogClick}>open modal</a> 
-            </div>
+            <BlogModal handleNewBlogSubmit={this.handleNewBlogSubmit} handleModalClose={this.handleModalClose} modalIsOpen={this.state.modalIsOpen}/>
+
+            {this.props.loggedInStatus === "LOGGED_IN" ?
+                <div className='new-blog-link'>
+                    <a className='blog-icon' onClick={this.handleNewBlogClick}> <FontAwesomeIcon icon={faPlusCircle}  /> </a> 
+                </div>
+            : null}
+
             <div className="content-container">
                     {blogRecords}
             </div>
@@ -94,7 +107,7 @@ export default class Blog extends Component {
 
             {this.state.isLoading === true ?   (        
                 <div className='content-loader'>
-                    <FontAwesomeIcon icon='spinner' spin />
+                    <FontAwesomeIcon icon={faSpinner} spin />
                 </div> )
             : null
             }
