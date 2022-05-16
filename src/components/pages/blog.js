@@ -92,6 +92,7 @@ export default class Blog extends Component {
         
         return(
         <div className='blog-container'>
+        
             <BlogModal handleNewBlogSubmit={this.handleNewBlogSubmit} handleModalClose={this.handleModalClose} modalIsOpen={this.state.modalIsOpen}/>
 
             {this.props.loggedInStatus === "LOGGED_IN" ?
@@ -111,6 +112,7 @@ export default class Blog extends Component {
                 </div> )
             : null
             }
+
         </div>
         )
     }

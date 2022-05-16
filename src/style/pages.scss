@@ -1,0 +1,14 @@
+.page-info-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    transition: .8s ease-in-out;
+    color: $pink;
+
+    &:hover {
+        color: $darkblue ;
+    }
+}

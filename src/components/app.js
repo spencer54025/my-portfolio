@@ -90,13 +90,17 @@ export default class App extends Component {
       <div className='container'>
         <Router>
           <div>
+
             <NavigationContainer 
             loggedInStatus={this.state.loggedInStatus}
             handleSuccessfulLogout={this.handleSuccessfulLogout}
             />
+
             <Switch>
                <Route exact path="/" component={Home} />
+
                <Route path="/about" component={About} />
+
                <Route
                 path="/auth"
                 render={props => (
@@ -106,6 +110,7 @@ export default class App extends Component {
                     handleUnSuccessfulLogin={this.handleUnSuccessfulLogin}
                   />
                 )}
+
                 />
               <Route path="/contact" component={Contact} />
 
@@ -114,8 +119,11 @@ export default class App extends Component {
               )} />
 
               <Route path="/b/:slug" component={BlogDetail} />
+
                {this.state.loggedInStatus === "LOGGED_IN" ? this.authorizedPages(): null}
+
                <Route exact path="/detail/:slug" component={PortfolioDetail} />
+               
                <Route component={NoMatch} />
             </Switch>
           </div>
