@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import RichTextEditor from '../forms/rich-text-editor'
 
 export default class BLogForm extends Component{
     constructor(props) {
@@ -7,10 +8,16 @@ export default class BLogForm extends Component{
 
         this.state = {
             title: "",
-            blog_status: ""
+            blog_status: "",
+            content: ''
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleTextEditorChange = this.handleTextEditorChange.bind(this)
+    }
+
+    handleTextEditorChange(content) {
+        this.setState({ content })
     }
 
     buildForm() {
@@ -18,6 +25,7 @@ export default class BLogForm extends Component{
 
         formData.append("portfolio_blog[title]", this.state.title)
         formData.append("portfolio_blog[blog_status]", this.state.blog_status)
+        formData.append("portfolio_blog[content]", this.state.content)
 
         return formData
     }
@@ -47,12 +55,15 @@ export default class BLogForm extends Component{
 
     render() {
         return(
-            <form onSubmit={this.handleSubmit} className='blog-form-wrapper' >
-                <input value={this.state.title} placeholder='Blog title' name='title' onChange={this.handleChange} type="text" />
-                <input value={this.state.blog_status} placeholder='Blog status' name='blog_status' onChange={this.handleChange} type="text" />
+            <div className='one-column'>
+                <form onSubmit={this.handleSubmit} className='blog-form-wrapper' >
+                    <input value={this.state.title} placeholder='Blog title' name='title' onChange={this.handleChange} type="text" />
+                    <input value={this.state.blog_status} placeholder='Blog status' name='blog_status' onChange={this.handleChange} type="text" />
+                    <RichTextEditor handleTextEditorChange={this.handleTextEditorChange} />
 
-                <button className='btn'>save</button>
-            </form>
+                    <button className='btn'>save</button>
+                </form>
+            </div>
         )
     }
 }
