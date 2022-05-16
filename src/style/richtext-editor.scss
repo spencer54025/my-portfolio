@@ -1,7 +1,17 @@
 .DraftEditor-root {
     border: 1px solid $pink;
     padding: 20px;
-    height: 20%;
     border-radius: 3px;
-    background-color: inherit;
-}
+  }
+  
+  .rdw-image-modal {
+    left: -215px;
+  }
+  
+  .rdw-emoji-modal {
+    left: -169px;
+  }
+  
+  .rdw-embedded-modal {
+    left: -124px;
+  }

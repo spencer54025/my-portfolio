@@ -8,6 +8,7 @@ export default class BLogForm extends Component{
         super(props)
 
         this.state = {
+            id: '',
             title: "",
             blog_status: "",
             content: '',
@@ -20,6 +21,16 @@ export default class BLogForm extends Component{
         this.djsConfig = this.djsConfig.bind(this)
         this.handleImageDrop = this.handleImageDrop.bind(this)
         this.imageRef = React.createRef()
+    }
+
+    componentWillMount() {
+        if(this.props.editMode) {
+            this.setState({
+                id: this.props.blog.id,
+                title: this.props.blog.title,
+                status: this.props.blog.status
+            })
+        }
     }
 
 
@@ -95,7 +106,10 @@ export default class BLogForm extends Component{
                 <form onSubmit={this.handleSubmit} className='blog-form-wrapper' >
                     <input value={this.state.title} placeholder='Blog title' name='title' onChange={this.handleChange} type="text" />
                     <input value={this.state.blog_status} placeholder='Blog status' name='blog_status' onChange={this.handleChange} type="text" />
-                    <RichTextEditor handleTextEditorChange={this.handleTextEditorChange} />
+                    <RichTextEditor editMode={this.props.editMode}
+                     handleTextEditorChange={this.handleTextEditorChange}
+                    contentToEdit={this.props.editMode && this.props.blog.content ? this.props.blog.content : null}
+                      />
 
                     <div className="image-uploaders">
                         <DropzoneComponent 
