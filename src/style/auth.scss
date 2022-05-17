@@ -14,4 +14,27 @@
         align-items: center;
         background-color: $darkfont;
     }
+    .auth-form {
+        @include input-element();
+        padding-bottom: 21px;
+    }
+    .form-input {
+        display: flex;
+
+        svg {
+            font-size: 1em;
+            margin-right: 15px;
+        }
+    }
+    .btn {
+        color: inherit;
+        background-color: inherit;
+        width: 100%;
+        transition: .9s ease-in-out;
+
+        &:hover {
+            background-color: $lightbackground;
+        }
+
+    }
 }

@@ -10,6 +10,12 @@
             width: 100%;
             color: $lightbackground;
             background-color: $darkfont;
+            transition: .8s ease-in-out;
+
+            &:hover {
+                background-color: $background;
+                color: $darkfont;
+            }
         }
     }
 }

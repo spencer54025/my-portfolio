@@ -36,6 +36,7 @@ export default class Blog extends Component {
                     return blog.id != blogItem.id
                 })
             })
+            return (response.data)
         })
         .catch(error => {
             console.log(error)
