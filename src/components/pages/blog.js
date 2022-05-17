@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faPlusCircle, faSpinner, faTrash } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import BlogItem from '../blog/blog-item'
 import BlogModal from "../modals/blog-modal"
@@ -24,6 +24,22 @@ export default class Blog extends Component {
         this.handleNewBlogClick = this.handleNewBlogClick.bind(this)
         this.handleModalClose = this.handleModalClose.bind(this)
         this.handleNewBlogSubmit = this.handleNewBlogSubmit.bind(this)
+        this.deleteBlog = this.deleteBlog.bind(this)
+    }
+
+    deleteBlog(blog) {
+        axios.delete(`https://api.devcamp.space/portfolio/portfolio_blogs/${blog.id}`, { withCredentials: true })
+        .then(response => {
+            console.log(response)
+            this.setState({
+                blogItems: this.state.blogItems.filter(blogItem => {
+                    return blog.id != blogItem.id
+                })
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
 
     handleNewBlogSubmit(blog) {
@@ -85,9 +101,18 @@ export default class Blog extends Component {
 
     render(){
         const blogRecords = this.state.blogItems.map(blogItem => {
+            if(this.props.loggedInStatus === "LOGGED_IN") {
+                return (
+                    <div key={blogItem.id} className="admin-blog">
+                        <BlogItem key={blogItem.id} blogItem={blogItem} />
+                        <a onClick={() => this.deleteBlog(blogItem)}><FontAwesomeIcon icon={faTrash} /></a>
+                    </div>
+                )
+            } else {
             return(
                 <BlogItem key={blogItem.id} blogItem={blogItem} />
             ) 
+            }
         })
         
         return(
