@@ -5,11 +5,13 @@
 @import "./grid.scss";
 @import "./button.scss";
 @import "./navigation.scss";
-@import './layouts';
+@import './layouts.scss';
+@import './home.scss';
 @import "./portfolio.scss";
 @import "./portfolio-sidebar.scss";
 @import "./auth.scss";
 @import "./portfolio-manager.scss";
+@import "./portfolio-detail.scss";
 @import "./portfolio-form.scss";
 @import "./blog.scss";
 @import "./loaders.scss";
@@ -19,5 +21,6 @@
 @import "./pages.scss";
 @import './richtext-editor';
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@1&display=swap');

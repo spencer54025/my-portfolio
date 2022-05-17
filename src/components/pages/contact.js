@@ -3,7 +3,7 @@ import picture from '../../../static/assets/images/auth/image.jpg'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPhone, faEnvelope, faMapMarked } from '@fortawesome/free-solid-svg-icons'
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
 
                     
 export default class Contact extends Component {
@@ -51,7 +51,15 @@ export default class Contact extends Component {
                                  <FontAwesomeIcon icon={faLinkedin} />
                             </div>
                             <div className="text">
-                               <span>Spencer Van Patten</span>
+                               <a href="https://linkedin.com/in/spencer-van-patten-88b21a23b" target='_blank'>Linkedin</a>
+                            </div>
+                        </div>
+                        <div className="bullet-point-group">
+                            <div className="icon">
+                                 <FontAwesomeIcon icon={faGithub} />
+                            </div>
+                            <div className="text">
+                               <a href="https://github.com/spencer54025" target='_blank'>github</a>
                             </div>
                         </div>
                     </div>
