@@ -12,8 +12,11 @@ export default class BLogForm extends Component{
             title: "",
             blog_status: "",
             content: '',
-            featured_image: ''
+            featured_image: '',
+            apiUrl: 'https://spencervp.devcamp.space/portfolio/portfolio_blogs',
+            apiAction: 'post'
         }
+
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleTextEditorChange = this.handleTextEditorChange.bind(this)
@@ -21,14 +24,32 @@ export default class BLogForm extends Component{
         this.djsConfig = this.djsConfig.bind(this)
         this.handleImageDrop = this.handleImageDrop.bind(this)
         this.imageRef = React.createRef()
+        this.deleteImage = this.deleteImage.bind(this)
     }
+
+    
+
+    deleteImage(imageType) {
+        axios.delete(
+          `https://api.devcamp.space/portfolio/delete-portfolio-blog-image/${this.props.blog
+            .id}?image_type=${imageType}`,
+          { withCredentials: true }
+          ).then(response => {
+              this.props.handleImageDelete()
+          }).catch(error => {
+            console.log("error: ", error)
+          })
+      }
 
     componentWillMount() {
         if(this.props.editMode) {
             this.setState({
                 id: this.props.blog.id,
                 title: this.props.blog.title,
-                status: this.props.blog.status
+                blog_status: this.props.blog.blog_status,
+                content: this.props.blog.content,
+                apiUrl: `https://spencervp.devcamp.space/portfolio/portfolio_blogs/${this.props.blog.id}`,
+                apiAction: 'patch'
             })
         }
     }
@@ -74,7 +95,12 @@ export default class BLogForm extends Component{
     }
     
     handleSubmit(event) {
-        axios.post("https://spencervp.devcamp.space/portfolio/portfolio_blogs", this.buildForm(), { withCredentials: true })
+        axios({
+            method: this.state.apiAction,
+            url: this.state.apiUrl,
+            data: this.buildForm(),
+            withCredentials: true
+        })
         .then(response => {
             if (this.state.featured_image) {
                 this.imageRef.current.dropzone.removeAllFiles()
@@ -85,7 +111,11 @@ export default class BLogForm extends Component{
               content: "",
               featured_image: ''
             });
+            if(this.props.editMode){
+                this.props.handleUpdateSubmit(response.data.portfolio_blog)
+            } else{
             this.props.handleFormSubmit(response.data.portfolio_blog)
+            }
         })
         .catch(error => {
             console.log('handle submit error', error)
@@ -102,16 +132,29 @@ export default class BLogForm extends Component{
 
     render() {
         return(
-            <div className='one-column'>
-                <form onSubmit={this.handleSubmit} className='blog-form-wrapper' >
+            <form onSubmit={this.handleSubmit} className='blog-form-wrapper' >
+                <div className="two-column">
                     <input value={this.state.title} placeholder='Blog title' name='title' onChange={this.handleChange} type="text" />
                     <input value={this.state.blog_status} placeholder='Blog status' name='blog_status' onChange={this.handleChange} type="text" />
-                    <RichTextEditor editMode={this.props.editMode}
-                     handleTextEditorChange={this.handleTextEditorChange}
-                    contentToEdit={this.props.editMode && this.props.blog.content ? this.props.blog.content : null}
-                      />
+                </div>
+                    <div className="one-column">
+                        <RichTextEditor editMode={this.props.editMode}
+                        handleTextEditorChange={this.handleTextEditorChange}
+                        contentToEdit={this.props.editMode && this.props.blog.content ? this.props.blog.content : null}
+                        />
+                    </div>
 
                     <div className="image-uploaders">
+                    {this.props.editMode && this.props.blog.featured_image_url ?(
+                        <div className="portfolio-manager-image-wrapper">
+                            <img src={this.props.blog.featured_image_url} />
+
+                            <div className="image-removal-link">
+                                <a onClick={() => this.deleteImage("featured_image")}>remove file</a>
+                            </div>
+                        </div>
+                    ) : 
+                    (
                         <DropzoneComponent 
                         config={this.componentConfig()}
                         djsConfig={this.djsConfig()}
@@ -120,11 +163,11 @@ export default class BLogForm extends Component{
                         >
                             <div className="dz-message">Featured Image</div>
                         </DropzoneComponent>
+                     )}
                     </div>
 
                     <button className='btn'>save</button>
                 </form>
-            </div>
         )
     }
 }
