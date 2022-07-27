@@ -30,12 +30,13 @@
             .subtitle {
                 transition: 1s ease-in-out;
                 color: transparent;
+                font-size: .5em;
             }
         }
 
         .img-text-wrapper:hover .subtitle {
-            color: $main-font;
-            font-weight: 600;
+            color: white;
+            font-weight: 500;
         }
 
         .logo-wrapper   img {
