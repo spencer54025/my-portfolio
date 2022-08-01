@@ -78,7 +78,7 @@ export default class App extends Component {
 	}
 
 	getViews() {
-		axios.get('http://127.0.0.1:5000/get_traffic/views')
+		axios.get('https://svp-website-traffic-api.herokuapp.com/get_traffic/views')
 		.then(res => {
 			console.log(res.data)
 			this.setState({
@@ -93,7 +93,7 @@ export default class App extends Component {
 
 	updateViews() {
 		console.log(this.state.viewCount + 1)
-		axios.put('http://127.0.0.1:5000/update_traffic/views', {
+		axios.put('https://svp-website-traffic-api.herokuapp.com/views', {
 			"count": (this.state.viewCount + 1)
 		})
 		.then(res => {
