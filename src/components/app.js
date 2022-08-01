@@ -19,10 +19,13 @@ export default class App extends Component {
 
 		this.state = {
 			loggedInStatus: "NOT_LOGGED_IN",
+			viewCount: 0
 		};
 		this.handleSuccessfulLogin = this.handleSuccessfulLogin.bind(this);
 		this.handleUnSuccessfulLogin = this.handleUnSuccessfulLogin.bind(this);
 		this.handleSuccessfulLogout = this.handleSuccessfulLogout.bind(this);
+		this.updateViews = this.updateViews.bind(this);
+		this.getViews = this.getViews.bind(this);
 	}
 
 	handleSuccessfulLogin() {
@@ -71,6 +74,34 @@ export default class App extends Component {
 
 	componentDidMount() {
 		this.checkLoginStatus();
+		this.getViews()
+	}
+
+	getViews() {
+		axios.get('http://127.0.0.1:5000/get_traffic/views')
+		.then(res => {
+			console.log(res.data)
+			this.setState({
+				viewCount: res.data.count
+			})
+			this.updateViews()
+		})
+		.catch(err => {
+			console.log(err)
+		})
+	}
+
+	updateViews() {
+		console.log(this.state.viewCount + 1)
+		axios.put('http://127.0.0.1:5000/update_traffic/views', {
+			"count": (this.state.viewCount + 1)
+		})
+		.then(res => {
+			console.log(res)
+		})
+		.catch(err => {
+			console.log(err)
+		})
 	}
 
 	authorizedPages() {
