@@ -93,7 +93,7 @@ export default class App extends Component {
 
 	updateViews() {
 		console.log(this.state.viewCount + 1)
-		axios.put('https://svp-website-traffic-api.herokuapp.com/views', {
+		axios.put('https://svp-website-traffic-api.herokuapp.com/update_traffic/views', {
 			"count": (this.state.viewCount + 1)
 		})
 		.then(res => {
